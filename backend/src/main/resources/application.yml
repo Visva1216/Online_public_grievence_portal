@@ -1,0 +1,77 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: delhi-grievance-portal
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/delhi_grievance?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true
+    username: root
+    password: Visva@1216
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: delhigrievences@gmail.com
+    password: tzys rxzc fowq eogu
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+# JWT Configuration
+app:
+  jwt:
+    secret: ThisIsA512BitSecretKeyForDelhiGrievancePortalJWTTokenSigningPurpose12345678901234567890
+    expiration: 86400000      # 24 hours in ms
+    refresh-expiration: 604800000  # 7 days in ms
+
+  # File upload
+  upload:
+    dir: ./uploads
+    complaint-images: ./uploads/complaints
+    voice-complaints: ./uploads/voice
+
+  # AI Service
+  ai-service:
+    url: http://localhost:5000
+    timeout: 30000
+
+  # Frontend URL for emails
+  frontend-url: http://localhost:3000
+
+  # Email sender
+  email:
+    from: noreply@delhi.gov.in
+    from-name: Delhi Grievance Portal
+
+logging:
+  level:
+    in.gov.delhi: DEBUG
+    org.springframework.security: INFO
+    org.springframework.web: INFO
